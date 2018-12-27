@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<persistence xmlns="http://java.sun.com/xml/ns/persistence" version="2.0">
+    <!--
+        persistence-unit元素: 配置连接的数据库信息,需要连接几个数据库,就配置几个该元素即可.
+        name:持久化单元名称,在创建EntityManagerFactory对象时,进行指定.
+        transaction-type:事务模式。
+            RESOURCE_LOCAL：本地事务,单机普通事务.
+            JTA：分布式事务
+    -->
+    <persistence-unit name="myJpa" transaction-type="RESOURCE_LOCAL">
+        <!--指定JPA规范的实现类(提供商)(不配置,默认就是hibernate)-->
+        <provider>org.hibernate.jpa.HibernatePersistenceProvider</provider>
+
+        <properties>
+            <!--连接数据库配置-->
+            <property name="javax.persistence.jdbc.user" value="root"/>
+            <property name="javax.persistence.jdbc.password" value="1234"/>
+            <property name="javax.persistence.jdbc.driver" value="com.mysql.jdbc.Driver"/>
+            <property name="javax.persistence.jdbc.url" value="jdbc:mysql://localhost:3306/javaee326"/>
+
+            <!--jpa实现方的配置-->
+            <!--是否打印hibernate生成的sql语句-->
+            <property name="hibernate.show_sql" value="true"/>
+            <!--是否格式化hibernate生成的sql语句-->
+            <property name="hibernate.format_sql" value="true"/>
+            <!--自动建表配置
+                #hibernate.hbm2ddl.auto create          自动建表,注意:表存在也会重新建表.测试时使用.
+                #hibernate.hbm2ddl.auto create-drop     自动建表,运行结束后将表删除.测试时使用.
+                #hibernate.hbm2ddl.auto update          自动更新表结构.包含自动建表,维护已经存在的表结构与实体映射一致.
+                #hibernate.hbm2ddl.auto validate        校验表结构.既不会修改表也不会建表.只负责校验
+                #hibernate.hbm2ddl.auto none            没有策略
+            -->
+            <property name="hibernate.hbm2ddl.auto" value="update"/>
+        </properties>
+    </persistence-unit>
+
+</persistence>
